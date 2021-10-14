@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { createContext } from "react";
+import Footer from "./components/Footer/Footer";
+import Foods from "./components/Foods/Foods";
+import Header from "./components/Header/Header";
+import HeaderNav from "./components/HeaderNav/HeaderNav";
+import useFoods from "./hooks/useFoods";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import OrderDetails from "./components/OrderReview/OrderReview";
 
-function App() {
+export const ContextApi = createContext();
+
+const App = () => {
+  const allContext = useFoods();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ContextApi.Provider value={allContext}>
+      <BrowserRouter>
+        <HeaderNav></HeaderNav>
+        <Header></Header>
+        <Switch>
+          <Route exact path="/">
+            <Foods></Foods>
+          </Route>
+          <Route path="/orderreview">
+            <OrderDetails></OrderDetails>
+          </Route>
+        </Switch>
+        <Footer></Footer>
+      </BrowserRouter>
+    </ContextApi.Provider>
   );
-}
+};
 
 export default App;

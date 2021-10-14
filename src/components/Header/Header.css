@@ -1,0 +1,7 @@
+.header {
+  background-image: url(./../../images/bannerbackground.png);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

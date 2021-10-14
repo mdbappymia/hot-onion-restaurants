@@ -1,0 +1,8 @@
+.nav-link {
+  cursor: pointer;
+}
+.foods-category.active::after {
+  content: "  ";
+  display: block;
+  border-bottom: 3px solid rgb(230, 165, 44);
+}

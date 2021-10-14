@@ -1,0 +1,11 @@
+.navbar-nav {
+  align-items: center;
+  font-weight: bold;
+}
+.img-fluid {
+  width: 20%;
+}
+.signup-btn {
+  border-radius: 25px !important;
+  padding: 7px 25px;
+}

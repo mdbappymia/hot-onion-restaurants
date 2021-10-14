@@ -1,0 +1,16 @@
+.footer-logo {
+  width: 30%;
+}
+.footer-list {
+  list-style: none;
+}
+.footer-list a {
+  text-decoration: none;
+  color: rgb(152, 154, 156);
+}
+.footer-bottom li {
+  margin: 0 10px;
+}
+.footer-list a:hover {
+  color: aliceblue;
+}
