@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link, useLocation, useHistory } from "react-router-dom";
 
@@ -12,6 +12,7 @@ const Login = () => {
     setLoginPassword,
     setIsLoading,
   } = useContext(ContextApi);
+  const [error, setError] = useState("");
   const location = useLocation();
   const history = useHistory();
   const dest_url = location.state?.from || "/";
@@ -28,6 +29,7 @@ const Login = () => {
       .then((result) => {
         history.push(dest_url);
       })
+      .catch((err) => setError(err.message))
       .finally(() => setIsLoading(false));
   };
   const handleEmailPasswordSignIn = (e) => {
@@ -37,11 +39,13 @@ const Login = () => {
       .then((result) => {
         history.push(dest_url);
       })
+      .catch((err) => setError(err.message))
       .finally(() => setIsLoading(false));
   };
   return (
     <div>
       <h2 className="text-center fw-bold my-4">Please Sign In</h2>
+      <p className="text-center text-danger">{error}</p>
       <form className="w-50 m-auto" onSubmit={handleEmailPasswordSignIn}>
         <input
           className="form-control mb-2"
