@@ -24,6 +24,9 @@ const useFoods = () => {
     }
     setCategoryFoods(selectedFoods);
   };
+  const clearCart = () => {
+    setCart([]);
+  };
   const cartHandler = (food) => {
     if (!food.quantity) {
       food.quantity = 1;
@@ -80,6 +83,7 @@ const useFoods = () => {
     up,
     down,
     calculateTotal,
+    clearCart,
   };
 };
 

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { ContextApi } from "../../App";
 
 const Shiping = () => {
   const [checked, setCkecked] = useState(false);
+  const { clearCart } = useContext(ContextApi);
   return (
     <Container>
       <Form onSubmit={(e) => e.preventDefault()} className="w-75 m-auto my-5">
@@ -28,8 +30,13 @@ const Shiping = () => {
           />
         </Form.Group>
         <Link to="/ordered">
-          <Button disabled={!checked} variant="primary" type="submit">
-            Submit
+          <Button
+            onClick={clearCart}
+            disabled={!checked}
+            variant="primary"
+            type="submit"
+          >
+            Order Submit
           </Button>
         </Link>
       </Form>
