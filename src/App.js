@@ -4,12 +4,14 @@ import Foods from "./components/Foods/Foods";
 import Header from "./components/Header/Header";
 import HeaderNav from "./components/HeaderNav/HeaderNav";
 import useFoods from "./hooks/useFoods";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import OrderDetails from "./components/OrderReview/OrderReview";
 import Login from "./components/Login/Login";
 import useFirebase from "./hooks/useFirebase";
 import SignUp from "./components/SignUp/SignUp";
 import Shiping from "./components/Shipping/Shiping";
+import PrivetRoute from "./components/PrivetRoute/PrivetRoute";
+import Ordered from "./components/Ordered/Ordered";
 
 export const ContextApi = createContext();
 
@@ -37,8 +39,14 @@ const App = () => {
           <Route path="/signup">
             <SignUp></SignUp>
           </Route>
-          <Route path="/shipping">
+          <PrivetRoute path="/shipping">
             <Shiping></Shiping>
+          </PrivetRoute>
+          <Route path="/ordered">
+            <Ordered></Ordered>
+          </Route>
+          <Route path="*">
+            <Redirect to="/"></Redirect>
           </Route>
         </Switch>
         <Footer></Footer>

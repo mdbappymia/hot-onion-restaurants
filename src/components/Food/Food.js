@@ -1,3 +1,5 @@
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useContext } from "react";
 import { Card, Col, Button } from "react-bootstrap";
 import { ContextApi } from "../../App";
@@ -14,26 +16,36 @@ const Food = ({ food, cartHandler }) => {
         <Card.Body>
           <Card.Title className="fw-bold fs-6">{name}</Card.Title>
           <Card.Text>{description.slice(0, 25)}</Card.Text>
+          <div className="d-flex justify-content-between">
+            <h3>Price: ${price}</h3>
+          </div>
         </Card.Body>
-        <div className="d-flex justify-content-between">
-          <h3>Price: ${price}</h3>
-          {cart.map((item) =>
-            item.name === food.name ? (
-              <Button
-                key={item.id}
-                onClick={() => removeToCart(food)}
-                variant="danger"
-              >
-                Remove
-              </Button>
-            ) : (
-              ""
-            )
-          )}
+        <div className="select-item">
+          <div className="align-items-center justify-content-center">
+            {cart.map((item) =>
+              item.name === food.name ? (
+                <Button
+                  key={item.id}
+                  onClick={() => removeToCart(food)}
+                  variant="danger"
+                >
+                  Remove
+                </Button>
+              ) : (
+                ""
+              )
+            )}
+          </div>
+          <p
+            className="justify-content-center align-items-center d-flex px-5 w-100 py-3 fw-bold text-light cart-add-button"
+            variant="none"
+            onClick={() => cartHandler(food)}
+          >
+            <Button>
+              <FontAwesomeIcon icon={faCartPlus} /> Add item
+            </Button>
+          </p>
         </div>
-        <Button variant="primary" onClick={() => cartHandler(food)}>
-          Add item
-        </Button>
       </Card>
     </Col>
   );

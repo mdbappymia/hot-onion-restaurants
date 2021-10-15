@@ -9,7 +9,7 @@ const SingleOrder = ({ item }) => {
 
   // const productPrice = price * quantity
   return (
-    <Card className="d-lg-flex flex-row">
+    <Card className="d-lg-flex  flex-row">
       <Card.Img variant="top" src={img} className="single-order-image" />
       <Card.Body>
         <Card.Title className="fw-bold">Food Name: {name}</Card.Title>

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Shiping = () => {
   const [checked, setCkecked] = useState(false);
   return (
     <Container>
-      <Form onSubmit={(e) => e.preventDefault()} className="w-75 m-auto">
+      <Form onSubmit={(e) => e.preventDefault()} className="w-75 m-auto my-5">
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />
@@ -26,9 +27,11 @@ const Shiping = () => {
             label="Accept terms of service"
           />
         </Form.Group>
-        <Button disabled={!checked} variant="primary" type="submit">
-          Submit
-        </Button>
+        <Link to="/ordered">
+          <Button disabled={!checked} variant="primary" type="submit">
+            Submit
+          </Button>
+        </Link>
       </Form>
     </Container>
   );

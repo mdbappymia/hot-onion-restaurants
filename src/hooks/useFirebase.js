@@ -16,34 +16,18 @@ const useFirebase = () => {
   const [password, setPassword] = useState("");
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const auth = getAuth();
   const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((result) => setUser(result.user))
-      .catch((err) => console.log(err.message));
+    return signInWithPopup(auth, provider);
   };
 
   const signupUsingEmailAndPassword = (e) => {
-    e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password).then(
-      (userCredential) => {
-        const user = userCredential.user;
-
-        setUser(user);
-        alert("Signup successful.");
-      }
-    );
+    return createUserWithEmailAndPassword(auth, email, password);
   };
   const signInUsingEmailAndPassword = (e) => {
-    e.preventDefault();
-    signInWithEmailAndPassword(auth, loginEmail, loginPassword).then(
-      (userCredential) => {
-        const user = userCredential.user;
-        setUser(user);
-        alert("Login Successful");
-      }
-    );
+    return signInWithEmailAndPassword(auth, loginEmail, loginPassword);
   };
   console.log(loginEmail, loginPassword);
   const logOut = () => {
@@ -52,13 +36,15 @@ const useFirebase = () => {
     });
   };
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unsubcribed = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
       } else {
         setUser({});
       }
+      setIsLoading(false);
     });
+    return unsubcribed;
   }, []);
   return {
     signInWithGoogle,
@@ -70,6 +56,8 @@ const useFirebase = () => {
     setPassword,
     setLoginEmail,
     setLoginPassword,
+    isLoading,
+    setIsLoading,
   };
 };
 

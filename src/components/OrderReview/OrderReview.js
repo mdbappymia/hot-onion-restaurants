@@ -10,7 +10,7 @@ const OrderDetails = () => {
   const grandTotalPrice = calculateTotal();
   // console.log(cart);
   return (
-    <div className="d-flex">
+    <div className="d-flex py-5">
       <div className="order-review-container w-75">
         {cart.map((item) => (
           <SingleOrder

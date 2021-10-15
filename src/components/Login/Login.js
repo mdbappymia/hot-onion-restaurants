@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
 
 import { ContextApi } from "../../App";
 
@@ -10,18 +10,39 @@ const Login = () => {
     signInUsingEmailAndPassword,
     setLoginEmail,
     setLoginPassword,
+    setIsLoading,
   } = useContext(ContextApi);
-
+  const location = useLocation();
+  const history = useHistory();
+  const dest_url = location.state?.from || "/";
+  console.log(dest_url);
   const logInEmail = (e) => {
     setLoginEmail(e.target.value);
   };
   const LoginPassword = (e) => {
     setLoginPassword(e.target.value);
   };
+  const handleSignInGoogle = () => {
+    setIsLoading(true);
+    signInWithGoogle()
+      .then((result) => {
+        history.push(dest_url);
+      })
+      .finally(() => setIsLoading(false));
+  };
+  const handleEmailPasswordSignIn = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    signInUsingEmailAndPassword()
+      .then((result) => {
+        history.push(dest_url);
+      })
+      .finally(() => setIsLoading(false));
+  };
   return (
     <div>
       <h2 className="text-center fw-bold my-4">Please Sign In</h2>
-      <form className="w-50 m-auto" onSubmit={signInUsingEmailAndPassword}>
+      <form className="w-50 m-auto" onSubmit={handleEmailPasswordSignIn}>
         <input
           className="form-control mb-2"
           placeholder="You Email"
@@ -42,7 +63,7 @@ const Login = () => {
         </div>
       </form>
       <div className="text-center my-5">
-        <Button onClick={signInWithGoogle}>Google Sign In</Button>
+        <Button onClick={handleSignInGoogle}>Google Sign In</Button>
       </div>
       <p className="text-center my5">
         New user? <Link to="/signup">Sign Up</Link>
