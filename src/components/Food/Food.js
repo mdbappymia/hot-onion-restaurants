@@ -6,6 +6,7 @@ import "./Food.css";
 const Food = ({ food, cartHandler }) => {
   const { name, img, description, price } = food;
   const { cart, removeToCart } = useContext(ContextApi);
+
   return (
     <Col lg={4}>
       <Card className="food-card">
@@ -26,7 +27,7 @@ const Food = ({ food, cartHandler }) => {
                 Remove
               </Button>
             ) : (
-              <div key={item.id}></div>
+              ""
             )
           )}
         </div>

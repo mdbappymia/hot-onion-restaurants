@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
 import { ContextApi } from "../../App";
 import SingleOrder from "../SingleOrder/SingleOrder";
+import { Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const OrderDetails = () => {
   const { cart, calculateTotal } = useContext(ContextApi);
@@ -18,7 +20,13 @@ const OrderDetails = () => {
           ></SingleOrder>
         ))}
       </div>
-      <h1>Total Price: ${grandTotalPrice}</h1>
+
+      <div className="ms-2 mt-5">
+        <h3>Total Price: ${grandTotalPrice}</h3>
+        <Link to="/shipping">
+          <Button>Process to shipping</Button>
+        </Link>
+      </div>
     </div>
   );
 };

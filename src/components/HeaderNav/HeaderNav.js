@@ -8,8 +8,8 @@ import { ContextApi } from "../../App";
 import { NavLink } from "react-router-dom";
 
 const HeaderNav = () => {
-  const { cart, calculateTotal } = useContext(ContextApi);
-  // console.log(cart);
+  const { cart, calculateTotal, user, logOut } = useContext(ContextApi);
+  console.log(user.email);
   return (
     <Navbar sticky="top" bg="light" expand="lg">
       <Container>
@@ -22,21 +22,33 @@ const HeaderNav = () => {
 
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
+            <Nav.Link href="#link">
+              <Button className="ms-3 total-btn" variant="info">
+                ${calculateTotal()}
+              </Button>
+            </Nav.Link>
             <NavLink className="nav-link" to="/orderreview">
               <FontAwesomeIcon icon={faCartPlus}></FontAwesomeIcon>
               <sup>
                 <Badge bg="danger">{cart.length}</Badge>
               </sup>
             </NavLink>
-            <Nav.Link href="#home">Login</Nav.Link>
-            <Nav.Link href="#link">
-              <Button className="signup-btn" variant="danger">
-                Signup
-              </Button>
-              <Button className="ms-3 total-btn" variant="info">
-                ${calculateTotal()}
-              </Button>
-            </Nav.Link>
+            <small>{user.displayName || user.email}</small>
+            {user.displayName || user.email ? (
+              <>
+                <Button
+                  variant="danger"
+                  className="signup-btn"
+                  onClick={logOut}
+                >
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <NavLink to="/signup">
+                <Button variant="primary">Signup</Button>
+              </NavLink>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>

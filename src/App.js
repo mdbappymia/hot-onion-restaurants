@@ -6,22 +6,39 @@ import HeaderNav from "./components/HeaderNav/HeaderNav";
 import useFoods from "./hooks/useFoods";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import OrderDetails from "./components/OrderReview/OrderReview";
+import Login from "./components/Login/Login";
+import useFirebase from "./hooks/useFirebase";
+import SignUp from "./components/SignUp/SignUp";
+import Shiping from "./components/Shipping/Shiping";
 
 export const ContextApi = createContext();
 
 const App = () => {
-  const allContext = useFoods();
+  const foodContext = useFoods();
+  const authContext = useFirebase();
+
+  const allContext = { ...foodContext, ...authContext };
   return (
     <ContextApi.Provider value={allContext}>
       <BrowserRouter>
         <HeaderNav></HeaderNav>
-        <Header></Header>
+
         <Switch>
           <Route exact path="/">
+            <Header></Header>
             <Foods></Foods>
           </Route>
           <Route path="/orderreview">
             <OrderDetails></OrderDetails>
+          </Route>
+          <Route path="/login">
+            <Login></Login>
+          </Route>
+          <Route path="/signup">
+            <SignUp></SignUp>
+          </Route>
+          <Route path="/shipping">
+            <Shiping></Shiping>
           </Route>
         </Switch>
         <Footer></Footer>
