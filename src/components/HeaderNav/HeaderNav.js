@@ -3,20 +3,17 @@ import "./HeaderNav.css";
 import logo from "./../../images/logo2.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { ContextApi } from "../../App";
 import { NavLink } from "react-router-dom";
+import useStore from "../../hooks/useStore";
 
 const HeaderNav = () => {
-  const { cart, calculateTotal, user, logOut } = useContext(ContextApi);
-  console.log(user.email);
+  const { cart, calculateTotal, user, logOut } = useStore();
+
   return (
     <Navbar sticky="top" bg="light" expand="lg">
       <Container>
-        <NavLink to="/">
-          <Navbar.Brand>
-            <img className="img-fluid" src={logo} alt="" />
-          </Navbar.Brand>
+        <NavLink className="brand-image" to="/">
+          <img className="img-fluid" src={logo} alt="" />
         </NavLink>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 

@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Container, Nav, Row, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ContextApi } from "../../App";
+import useStore from "../../hooks/useStore";
 import Food from "../Food/Food";
 import "./Foods.css";
 
 const Foods = () => {
-  const { categorySelected, categoryfoods, cartHandler, cart } =
-    useContext(ContextApi);
+  const { categorySelected, categoryfoods, cartHandler, cart } = useStore();
   let disabled = true;
   if (cart.length) {
     disabled = false;
@@ -16,7 +15,7 @@ const Foods = () => {
   return (
     <Container>
       <div>
-        <Nav className="justify-content-center">
+        <Nav defaultActiveKey="#breakfast" className="justify-content-center">
           <Nav.Link
             onClick={() => categorySelected("breakfast")}
             className="foods-category"

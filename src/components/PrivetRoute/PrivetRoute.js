@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
 import { Spinner } from "react-bootstrap";
 import { Redirect, Route } from "react-router";
-import { ContextApi } from "../../App";
+import useStore from "../../hooks/useStore";
 
 const PrivetRoute = ({ children, ...rest }) => {
-  const { user, isLoading } = useContext(ContextApi);
+  const { user, isLoading } = useStore();
   if (isLoading) {
     return (
       <div className="my-5 py-5 text-center">

@@ -1,16 +1,23 @@
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext } from "react";
+import React from "react";
 import { Card, Col, Button } from "react-bootstrap";
-import { ContextApi } from "../../App";
+import useStore from "../../hooks/useStore";
 import "./Food.css";
 
 const Food = ({ food, cartHandler }) => {
   const { name, img, description, price } = food;
-  const { cart, removeToCart } = useContext(ContextApi);
+  const { cart, removeToCart } = useStore();
+  // const [remove, setRemove] = useState(false);
+  let remove = false;
+  for (let item of cart) {
+    if (item.name === food.name) {
+      remove = true;
+    }
+  }
 
   return (
-    <Col lg={4}>
+    <Col lg={4} md={6}>
       <Card className="food-card">
         <Card.Img className="card-image" variant="top" src={img} />
         <Card.Body>
@@ -21,29 +28,19 @@ const Food = ({ food, cartHandler }) => {
           </div>
         </Card.Body>
         <div className="select-item">
-          <div className="align-items-center justify-content-center">
-            {cart.map((item) =>
-              item.name === food.name ? (
-                <Button
-                  key={item.id}
-                  onClick={() => removeToCart(food)}
-                  variant="danger"
-                >
-                  Remove
-                </Button>
-              ) : (
-                ""
-              )
-            )}
-          </div>
           <p
             className="justify-content-center align-items-center d-flex px-5 w-100 py-3 fw-bold text-light cart-add-button"
             variant="none"
-            onClick={() => cartHandler(food)}
           >
-            <Button>
-              <FontAwesomeIcon icon={faCartPlus} /> Add item
-            </Button>
+            {!remove ? (
+              <Button onClick={() => cartHandler(food)}>
+                <FontAwesomeIcon icon={faCartPlus} /> Add item
+              </Button>
+            ) : (
+              <Button onClick={() => removeToCart(food)} variant="danger">
+                Remove
+              </Button>
+            )}
           </p>
         </div>
       </Card>

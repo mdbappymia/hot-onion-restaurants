@@ -1,33 +1,34 @@
-import React, { useContext } from "react";
-import { ContextApi } from "../../App";
 import SingleOrder from "../SingleOrder/SingleOrder";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import "./OrderReview.css";
+import useStore from "../../hooks/useStore";
 
 const OrderDetails = () => {
-  const { cart, calculateTotal } = useContext(ContextApi);
+  const { cart, calculateTotal } = useStore();
 
   const grandTotalPrice = calculateTotal();
   // console.log(cart);
   return (
-    <div className="d-flex py-5">
-      <div className="order-review-container w-75">
-        {cart.map((item) => (
-          <SingleOrder
-            quantity={item.quantity}
-            key={item.id}
-            item={item}
-          ></SingleOrder>
-        ))}
-      </div>
-
-      <div className="ms-2 mt-5">
+    <Container>
+      <div className="ms-2 mt-5 order-info">
         <h3>Total Price: ${grandTotalPrice}</h3>
         <Link to="/shipping">
           <Button>Process to shipping</Button>
         </Link>
       </div>
-    </div>
+      <div className="d-flex py-5">
+        <div className="order-review-container">
+          {cart.map((item) => (
+            <SingleOrder
+              quantity={item.quantity}
+              key={item.id}
+              item={item}
+            ></SingleOrder>
+          ))}
+        </div>
+      </div>
+    </Container>
   );
 };
 

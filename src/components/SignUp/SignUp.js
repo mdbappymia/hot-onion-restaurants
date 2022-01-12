@@ -1,7 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import { ContextApi } from "../../App";
+
+import useStore from "../../hooks/useStore";
 
 const SignUp = () => {
   const {
@@ -9,7 +10,7 @@ const SignUp = () => {
     signupUsingEmailAndPassword,
     setEmail,
     setPassword,
-  } = useContext(ContextApi);
+  } = useStore();
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const history = useHistory();

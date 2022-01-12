@@ -1,9 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import { Link, useLocation, useHistory } from "react-router-dom";
-
-import { ContextApi } from "../../App";
-
+import useStore from "../../hooks/useStore";
 const Login = () => {
   const {
     signInWithGoogle,
@@ -11,7 +9,7 @@ const Login = () => {
     setLoginEmail,
     setLoginPassword,
     setIsLoading,
-  } = useContext(ContextApi);
+  } = useStore();
   const [error, setError] = useState("");
   const location = useLocation();
   const history = useHistory();

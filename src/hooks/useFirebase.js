@@ -29,7 +29,6 @@ const useFirebase = () => {
   const signInUsingEmailAndPassword = (e) => {
     return signInWithEmailAndPassword(auth, loginEmail, loginPassword);
   };
-  console.log(loginEmail, loginPassword);
   const logOut = () => {
     signOut(auth).then(() => {
       console.log("signout");
@@ -45,7 +44,7 @@ const useFirebase = () => {
       setIsLoading(false);
     });
     return unsubcribed;
-  }, []);
+  }, [auth]);
   return {
     signInWithGoogle,
     signupUsingEmailAndPassword,

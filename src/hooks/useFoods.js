@@ -1,20 +1,12 @@
+import foods from "./fakeDb.json";
 import { useEffect, useState } from "react";
-
 const useFoods = () => {
-  const [foods, setFoods] = useState([]);
   const [categoryfoods, setCategoryFoods] = useState([]);
   const [cart, setCart] = useState([]);
   useEffect(() => {
-    fetch("fakeDb.json")
-      .then((res) => res.json())
-      .then((data) => {
-        setFoods(data);
-      });
-  }, []);
-  useEffect(() => {
     categorySelected("breakfast");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [foods]);
+  }, []);
   const categorySelected = (category) => {
     const selectedFoods = [];
     for (let food of foods) {
